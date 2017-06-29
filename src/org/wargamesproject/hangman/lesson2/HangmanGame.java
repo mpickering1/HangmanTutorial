@@ -66,6 +66,7 @@ public class HangmanGame
 				String nextWord = wordScanner.nextLine();
 				this.wordList.add(nextWord);
 			}
+			wordScanner.close();
 			
 			success = true;
 		}
@@ -87,26 +88,21 @@ public class HangmanGame
 		System.out.println("Welcome to Hangman!");
 		
 		// Prompt for the player's name.  Make sure they enter at least two characters
-		boolean goodName = false;
 		String playerName = null;
 		
 		Scanner nameScan = new Scanner(System.in);
 		
-		while (goodName == false)
+		do
 		{
 			System.out.print("Enter player name: ");
 			playerName = nameScan.nextLine();
 			
-			if (playerName.length() >= 2)
-			{
-				goodName = true;
-				nameScan.close();
-			}
-			else
+			if (playerName.length() < 2)
 			{
 				System.out.println("ERROR: Player name must be at least 2 characters!  Try again...");
 			}
 		}
+		while (playerName.length() < 2);
 		
 		// Create the Player object instance passing in the player's name
 		Player humanPlayer = new Player(playerName);
